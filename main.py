@@ -8,23 +8,22 @@ from helpers.gridConstructor import GridConstructor
 from helpers.binaceTrader import BinanceTrader
 
 init(autoreset=True)
-file_manager = FileManager()
-grid_constructor = GridConstructor()
-backoffice = BackOffice()
-settings = file_manager.read_json_file(file_name=f'botSetup.json')
-binance_trader = BinanceTrader(public_key=settings["binancePublic"], private_key=settings["binancePrivate"])
-klines_manager = TaManager(client=binance_trader.client, klines_length=settings["rsiTimeframe"])
+file_manager = FileManager()  # Объект для управления файлами
+grid_constructor = GridConstructor()  # Объект для конструирования сетки
+backoffice = BackOffice()  # Объект для управления базой данных
+settings = file_manager.read_json_file(file_name=f'botSetup.json')  # Чтение настроек из файла
+binance_trader = BinanceTrader(public_key=settings["binancePublic"], private_key=settings["binancePrivate"])  # Объект для работы с Binance API
+klines_manager = TaManager(client=binance_trader.client, klines_length=settings["rsiTimeframe"])  # Объект для управления данными свечей и технического анализа
 
-# Loading grid data
-SYMBOLS = settings["markets"]
-INTERVAL = settings["gridDistance"]
-GRID_LEVELS = settings["grids"]
-GRID_BASE = settings["base"].upper()
+# Загрузка данных сетки
+SYMBOLS = settings["markets"]  # Символы для торговли
+INTERVAL = settings["gridDistance"]  # Интервал между уровнями сетки
+GRID_LEVELS = settings["grids"]  # Количество уровней сетки
+GRID_BASE = settings["base"].upper()  # Базовая цена сетки (BID или ASK)
 
-# Money Management
-DOLLAR_PER_TOKEN = settings["dollarPerCoin"]
-GAIN = settings["gain"]
-
+# Управление денежными средствами
+DOLLAR_PER_TOKEN = settings["dollarPerCoin"]  # Количество долларов за каждый токен
+GAIN = settings["gain"]  # Прибыль в процентах
 
 def deploy_grid(symbol):
     """
