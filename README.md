@@ -45,20 +45,20 @@ Create file into main directory under the name `botSetup.json` and fill in follo
 
 ```json
 {
-  "binancePrivate":".....",
-  "binancePublic": ".....",
-  "markets": ["BNBUSDT", "MATICUSDT"],  // List of pairs to create grid
-  "gridDistance": 0.005,  //Set at 0.5% distance between grids
-  "grids": 4,  // Amount of grids for limit buy to be created...currently 4
-  "base": "bid", // Which based to use for grid calculation: bid, ask
-  "dollarPerCoin": 240, // UDST devoted per pair
-  "gain": 0.020 // Exit percentage for limit sell from marked buy price
-  "monitor": 120 //Seconds between grid re-checks currently set to 120
-  "stopLimitSellPerc": 0.02  // Stop limit sell perc set at 2%,
-  "rsiTimeframe": "15", // What OHLCV data to query according to timeframe
-  "rsiLength": 14, // RSI length to be applied on Close
-  "rsiManager": 47 // Rsi limit for GRID deployment. Above selected nubmer grids are not created
-}
+    "binancePrivate": "ORW2huYVmHHuHsUAK6rZCA1wAm45sWFVtqHbndjZsm5cuzMfGgcI5v9sUqeK77BG",
+    "binancePublic": "WzZ9JgOQZFDVY0rmBYUMFfbZLmfMUtsty3kpkSUu8ncZKwv4os8mHbLoPS5RzDaK",
+    "markets": ["BNBUSDT", "MATICUSDT"],  // Список пар, для которых создается сетка (например, ["BNBUSDT", "BTCUSDT"])
+    "gridDistance": 0.5,  // Устанавливает расстояние между сетками в 50% (можно изменить, например, на 0.01 для 1%)
+    "grids": 4,  // Количество сеток для создания ордеров на покупку (например, установите 10 для создания 10 сеток)
+    "base": "bid", // Основа для расчета сетки: bid (цена предложения) или ask (цена спроса)
+    "dollarPerCoin": 100, // Количество USDT, выделяемое для каждой пары (например, установите 100 для использования 100 USDT) Это означает, что вы выделяете 100 USDT для торговли каждой валютной парой, и у вас есть 4 сетки. Следовательно, каждый ордер в сетке будет составлять 100/ "grids": 4 = 25 USDT.
+    "gain": 0.020, // (Take Profit) Процент выхода для ограничения продажи от отмеченной цены покупки (например, 0.05 для 5%) 
+    "monitor": 120, // Количество секунд между повторными проверками сетки (например, установите 300 для проверки каждые 5 минут)
+    "stopLimitSellPerc": 0.02,  //  (Stop Loss) Установите процент стоп-лимита на продажу (например, 0.03 для 3%)
+    "rsiTimeframe": "15", // Укажите таймфрейм OHLCV для запроса данных (например, "5" для 5 минут или "1H" для 1 часа)
+    "rsiLength": 14, // Укажите длину RSI, применяемую к закрытию (например, установите 10 для RSI длиной 10)
+    "rsiManager": 47 // Установите предел RSI для развертывания сетки. Сетки не создаются, если значение выше выбранного числа (например, 50)
+  }
 
 ```
 
